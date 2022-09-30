@@ -1,0 +1,41 @@
+
+# VOIE Txverify Constraints
+
+## Structure
+
+`VOIETxverifyConstraints`
+
+## Fields
+
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `accountIds` | `string` | Required | Specific accountIds to be included in the report. If this is not passed then the report will default to using all supported accounts previously added for this customer. |
+| `incomeStreamConfidenceMinimum` | `number \| undefined` | Optional | Include income streams in the report, based on the income stream’s confidence score. <br> <br> **Example**: If you pass in the value 50, then only income streams with a confidence score of 50 or higher are included. |
+| `voieWithInterviewData` | [`VOIEWithInterviewData`](../../doc/models/voie-with-interview-data.md) | Required | - |
+| `reportCustomFields` | [`ReportCustomField[] \| undefined`](../../doc/models/report-custom-field.md) | Optional | Designate up to 5 custom fields that you would like associated with the report upon generation by providing a label for the field and a value for the field. Set the shown variable to true if you want the custom field to display in the PDF reports. Set the shown variable to false to limit seeing the variable to JSON, XML report but not in the PDF report. All custom fields will display in the Reseller Billing endpoint.  This is optional. |
+| `fromDate` | `bigint \| undefined` | Optional | The fromDate parameter is an Epoch Timestamp (in seconds), such as '1494449017'. Without this parameter, the report defaults to 61 days if available. Example: ?fromDate={fromDate}. If included, the epoch timestamp should be 10 digits long and be within twelve months of the present day. Extending the epoch timestamp beyond 10 digits will default back to twelve months of data. This query is optional. fromDate can also be passed as a query. |
+
+## Example (as JSON)
+
+```json
+{
+  "accountIds": "1028361677",
+  "incomeStreamConfidenceMinimum": 50,
+  "voieWithInterviewData": {
+    "txVerifyInterview": [
+      {
+        "assetId": "7eb57060-6d98-4449-992d-4dd4490448f3-1236011097"
+      }
+    ]
+  },
+  "reportCustomFields": [
+    {
+      "label": "loanID",
+      "value": "123456",
+      "shown": true
+    }
+  ],
+  "fromDate": 1580558400
+}
+```
+
